@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Home } from './Home';
-import { DonorPage } from './DonorPage';
-import { ReceiverPage } from './User';
-import { EligibilityForm } from './EligibilityForm';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
+import Register from './Register';
+import Login from './Login';
+import Donor from './Donor';
+import Receiver from './Receiver';
+import FoodList from './FoodList';
+import Eligibility from './Eligibility';
+import Cart from './Cart';
+import './App.css';
 
 function App() {
-  const [userRole, setUserRole] = useState(null); // Track user role (donor or receiver)
-
   return (
     <Router>
-      <div>
-        <h1>Food Donation App</h1>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/donor" component={DonorPage} />
-          <Route path="/receiver" component={ReceiverPage} />
-          <Route path="/eligibility" component={EligibilityForm} />
-        </Switch>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/donor" element={<Donor />} />
+          <Route path="/receiver" element={<Receiver />} />
+          <Route path="/food-list" element={<FoodList />} />
+          <Route path="/eligibility" element={<Eligibility />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
       </div>
     </Router>
   );

@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from './firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-function Register() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate('/receiver'); // Redirect to the receiver page to choose role
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    // Mock login: check if email matches the stored user
+    if (localStorage.getItem('userEmail') === email) {
+      localStorage.setItem('isAuthenticated', true);
+      navigate('/receiver'); // Redirect to role selection
+    } else {
+      alert('User not found. Please register first.');
+    }
   };
 
   return (
     <div>
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
@@ -37,10 +35,10 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
 
-export default Register;
+export default Login;

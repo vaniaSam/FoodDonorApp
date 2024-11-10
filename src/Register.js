@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from './firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -10,13 +8,10 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate('/receiver'); // Redirect to the receiver page to choose role
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    // Mock registration process
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('isAuthenticated', true);
+    navigate('/receiver'); // Redirect to role selection
   };
 
   return (
@@ -44,3 +39,4 @@ function Register() {
 }
 
 export default Register;
+
